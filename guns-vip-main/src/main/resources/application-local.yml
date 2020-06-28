@@ -1,0 +1,47 @@
+server:
+  servlet:
+    context-path: /guns
+
+# Mysql数据库
+spring:
+  security:
+    filter:
+      order: -100
+      dispatcher-types: async,error,request
+  main:
+    allow-bean-definition-overriding: true
+  cas:
+    server-name: http://localhost:8088/guns
+    cas-server-url-prefix: http://localhost:8080/cas
+    cas-server-login-url: http://localhost:8080/cas/login
+    cas-server-logout-url: http://localhost:8080/cas/logout
+#  cas:
+#    server-name: http://localhost:8088/guns
+#    cas-server-url-prefix: https://localhost:8443/cas
+#    cas-server-login-url: https://localhost:8443/cas/login
+#    cas-server-logout-url: https://localhost:8443/cas/logout
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guns_advanced?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: mysql
+    filters: wall,mergeStat
+
+    # 连接池大小根据实际情况调整
+    max-active: 20
+    max-pool-prepared-statement-per-connection-size: 20
+
+  # 邮件发送配置（改为自己的账号和密码）
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: sn93@qq.com
+    password: xxxpassword
+
+# 邮件发送（改为自己的账号）
+mail:
+  from: sn93@qq.com
+
+
+
