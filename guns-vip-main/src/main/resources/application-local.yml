@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /guns
+    context-path: /ai
 
 # Mysql数据库
 spring:
@@ -11,7 +11,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   cas:
-    server-name: http://localhost:8088/guns
+    server-name: http://localhost:8088/ai
     cas-server-url-prefix: http://localhost:8080/cas
     cas-server-login-url: http://localhost:8080/cas/login
     cas-server-logout-url: http://localhost:8080/cas/logout
@@ -23,7 +23,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/guns_advanced?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    url: jdbc:mysql://localhost:3306/ai?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
     username: root
     password: mysql
     filters: wall,mergeStat

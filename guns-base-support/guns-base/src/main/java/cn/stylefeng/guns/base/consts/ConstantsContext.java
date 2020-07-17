@@ -169,7 +169,7 @@ public class ConstantsContext {
             return getTempPath();
         } else {
             //判断有没有结尾符
-            if (!gunsFileUploadPath.endsWith(File.separator)) {
+            if (!gunsFileUploadPath.endsWith(File.separator)&&!gunsFileUploadPath.endsWith("/")) {
                 gunsFileUploadPath = gunsFileUploadPath + File.separator;
             }
 

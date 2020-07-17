@@ -21,7 +21,7 @@ public class Position implements Serializable {
     /**
      * 主键id
      */
-    @TableId(value = "position_id", type = IdType.ID_WORKER)
+    @TableId(value = "position_id", type = IdType.AUTO)
     private Long positionId;
 
     /**
@@ -162,16 +162,16 @@ public class Position implements Serializable {
     @Override
     public String toString() {
         return "Position{" +
-        "positionId=" + positionId +
-        ", name=" + name +
-        ", code=" + code +
-        ", sort=" + sort +
-        ", status=" + status +
-        ", remark=" + remark +
-        ", createTime=" + createTime +
-        ", updateUser=" + updateUser +
-        ", updateTime=" + updateTime +
-        ", createUser=" + createUser +
-        "}";
+                "positionId=" + positionId +
+                ", name=" + name +
+                ", code=" + code +
+                ", sort=" + sort +
+                ", status=" + status +
+                ", remark=" + remark +
+                ", createTime=" + createTime +
+                ", updateUser=" + updateUser +
+                ", updateTime=" + updateTime +
+                ", createUser=" + createUser +
+                "}";
     }
 }

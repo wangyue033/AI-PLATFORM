@@ -187,4 +187,14 @@ public class FileInfoService extends ServiceImpl<FileInfoMapper, FileInfo> {
 
         return this.getOne(queryWrapper);
     }
+
+    /**
+     * 根据文件的ID名获取文件信息
+     *
+     * @author fengshuonan
+     * @Date 2020/1/1 16:48
+     */
+    public FileInfo getFileById(String fileId) {
+        return this.getById(fileId);
+    }
 }

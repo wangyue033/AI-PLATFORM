@@ -91,7 +91,8 @@ public class LoginController extends BaseController {
                 return "/login.html";
             } else {
                 model.addAllAttributes(userIndexInfo);
-                return "/index.html";
+//                return "/index.html";
+                return "/init.html";
             }
 
         } else {
@@ -106,9 +107,21 @@ public class LoginController extends BaseController {
      * @author fengshuonan
      * @Date 2018/12/23 5:41 PM
      */
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/indexPre", method = RequestMethod.GET)
     public String index() {
+        return "/index.html";
+    }
 
+    /**
+     * 跳转到登录页面
+     *
+     * @author fengshuonan
+     * @Date 2018/12/23 5:41 PM
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String init2index(Model model) {
+        Map<String, Object> userIndexInfo = userService.getUserIndexInfo();
+        model.addAllAttributes(userIndexInfo);
         return "/index.html";
     }
 

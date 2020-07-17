@@ -2,10 +2,13 @@ package cn.stylefeng.guns.sys.modular.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
 
 /**
@@ -24,7 +27,7 @@ public class Role implements Serializable {
     /**
      * 主键id
      */
-    @TableId(value = "role_id", type = IdType.ID_WORKER)
+    @TableId(value = "role_id", type = IdType.AUTO)
     private Long roleId;
 
     /**
@@ -165,16 +168,16 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "Role{" +
-        "roleId=" + roleId +
-        ", pid=" + pid +
-        ", name=" + name +
-        ", description=" + description +
-        ", sort=" + sort +
-        ", version=" + version +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", createUser=" + createUser +
-        ", updateUser=" + updateUser +
-        "}";
+                "roleId=" + roleId +
+                ", pid=" + pid +
+                ", name=" + name +
+                ", description=" + description +
+                ", sort=" + sort +
+                ", version=" + version +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", createUser=" + createUser +
+                ", updateUser=" + updateUser +
+                "}";
     }
 }

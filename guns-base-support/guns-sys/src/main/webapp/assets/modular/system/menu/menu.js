@@ -29,12 +29,12 @@ layui.use(['layer', 'form', 'ztree', 'laydate', 'admin', 'ax', 'treeTable', 'fun
     Menu.initColumn = function () {
         return [
             {type: 'numbers'},
-            {field: 'name', align: "left", sort: true, title: '菜单名称', minWidth: 240},
+            {field: 'name', align: "left", sort: true, title: '菜单名称', minWidth: 1000},
             {field: 'code', align: "center", sort: true, title: '菜单编号', minWidth: 120},
-            {field: 'pcode', align: "center", sort: true, title: '菜单父编号'},
+            // {field: 'pcode', align: "center",  hide: true,sort: true, title: '菜单父编号'},
             {field: 'url', align: "center", sort: true, title: '请求地址'},
-            {field: 'sort', align: "center", sort: true, title: '排序'},
-            {field: 'levels', align: "center", sort: true, title: '层级'},
+            // {field: 'sort', align: "center",  hide: true,sort: true, title: '排序'},
+            // {field: 'levels', align: "center", hide: true,sort: true, title: '层级'},
             {field: 'isMenuName', align: "center", sort: true, title: '是否是菜单'},
             {field: 'statusName', align: "center", sort: true, title: '状态'},
             {align: 'center', toolbar: '#menuTableBar', title: '操作', minWidth: 200}

@@ -47,7 +47,6 @@ public class UserDto {
 
     private String sex;
 
-    @NotBlank
     private String email;
 
     private String phone;
@@ -61,7 +60,6 @@ public class UserDto {
 
     private String avatar;
 
-    @NotBlank
     private String position;
 
 }

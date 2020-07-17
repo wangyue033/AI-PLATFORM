@@ -296,7 +296,7 @@ public class SystemController extends BaseController {
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("fileId", fileId);
-
+        map.put("fileSavePath", uploadResult.getFileSavePath());
         return ResponseData.success(0, "上传成功", map);
     }
 

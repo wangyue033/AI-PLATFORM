@@ -38,7 +38,7 @@ layui.use(['table', 'admin', 'ax'], function () {
             {field: 'checkbox', align: "center", sort: true, title: '复选框'},
             {field: 'number', align: "center", sort: true, title: '数字'},
             {field: 'longText', align: "center", sort: true, title: '长字段'},
-            {align: 'center', toolbar: '#tableBar', title: '操作'}
+            {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 650}
         ]];
     };
 

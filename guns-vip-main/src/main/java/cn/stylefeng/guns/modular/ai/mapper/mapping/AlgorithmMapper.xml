@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.ai.mapper.AlgorithmMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.ai.entity.Algorithm">
+        <id column="id" property="id"/>
+        <result column="alg_code" property="algCode"/>
+        <result column="alg_name" property="algName"/>
+        <result column="description" property="description"/>
+        <result column="ranged" property="ranged"/>
+        <result column="version" property="version"/>
+        <result column="load_location" property="loadLocation"/>
+        <result column="document_location" property="documentLocation"/>
+        <result column="data_owner" property="dataOwner"/>
+        <result column="in_params" property="inParams"/>
+        <result column="result" property="result"/>
+        <result column="state" property="state"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="reviewer" property="reviewer"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="review_opinion" property="reviewOpinion"/>
+        <result column="share_target" property="shareTarget"/>
+        <result column="remark" property="remark"/>
+        <result column="is_open" property="isOpen"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", alg_code AS "algCode", alg_name AS "algName", description AS "description", ranged AS "ranged", version AS "version", load_location AS "loadLocation", document_location AS "documentLocation", data_owner AS "dataOwner", in_params AS "inParams", result AS "result", state AS "state", create_user AS "createUser", create_time AS "createTime", reviewer AS "reviewer", review_time AS "reviewTime", review_opinion AS "reviewOpinion", share_target AS "shareTarget", remark AS "remark"
+    </sql>
+
+    <sql id="Full_Column_List">
+        ta.id AS "id", ta.alg_code AS "algCode", ta.alg_name AS "algName", ta.description AS "description", ta.ranged AS "ranged", ta.version AS "version", ta.load_location AS "loadLocation", ta.document_location AS "documentLocation", ta.data_owner AS "dataOwner", ta.in_params AS "inParams",
+        ta.result AS "result", ta.state AS "state", ta.create_user AS "createUser", ta.create_time AS "createTime", ta.reviewer AS "reviewer", ta.review_time AS "reviewTime",ta.review_opinion AS "reviewOpinion", ta.share_target AS "shareTarget", ta.remark AS "remark",
+        su.name as "createUserName" , sur.name as "reviewerName",ta.is_open as "isOpen"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.AlgorithmResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_algorithm where 1 = 1
+        <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
+            and alg_code like CONCAT('%',#{paramCondition.algCode},'%')
+        </if>
+        <if test="paramCondition.algName != null and paramCondition.algName != ''">
+            and alg_name like CONCAT('%',#{paramCondition.algName},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_algorithm where 1 = 1
+        <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
+            and alg_code like CONCAT('%',#{paramCondition.algCode},'%')
+        </if>
+        <if test="paramCondition.algName != null and paramCondition.algName != ''">
+            and alg_name like CONCAT('%',#{paramCondition.algName},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.AlgorithmResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
+        select
+        <include refid="Full_Column_List"/>
+        from tb_algorithm ta
+        left join sys_user su on ta.create_user = su.user_id
+        left join sys_user sur on ta.reviewer = sur.user_id
+        where 1 = 1 and ta.state != 'DELETED'
+        <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
+            and ta.alg_code like CONCAT('%',#{paramCondition.algCode},'%')
+        </if>
+        <if test="paramCondition.algName != null and paramCondition.algName != ''">
+            and ta.alg_name like CONCAT('%',#{paramCondition.algName},'%')
+        </if>
+        order by ta.id desc
+    </select>
+
+
+    <select id="CommonCustomPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.AlgorithmResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
+        select
+        <include refid="Full_Column_List"/>
+        from tb_algorithm ta
+        left join sys_user su on ta.create_user = su.user_id
+        left join sys_user sur on ta.reviewer = sur.user_id
+        where 1 = 1 and ta.state != 'DELETED'
+        <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
+            and ta.alg_code like CONCAT('%',#{paramCondition.algCode},'%')
+        </if>
+        <if test="paramCondition.algName != null and paramCondition.algName != ''">
+            and ta.alg_name like CONCAT('%',#{paramCondition.algName},'%')
+        </if>
+        and (
+        ta.is_open='on'
+        or (
+        ta.share_target like CONCAT('%',#{shareTarget},'%')
+        or ta.create_user = #{createId}
+        )
+        )
+        order by ta.id desc
+    </select>
+
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_algorithm where 1 = 1
+        <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
+            and alg_code like CONCAT('%',#{paramCondition.algCode},'%')
+        </if>
+        <if test="paramCondition.algName != null and paramCondition.algName != ''">
+            and alg_name like CONCAT('%',#{paramCondition.algName},'%')
+        </if>
+    </select>
+</mapper>

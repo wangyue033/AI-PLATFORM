@@ -23,7 +23,7 @@ public class Dept implements Serializable {
     /**
      * 主键id
      */
-    @TableId(value = "dept_id", type = IdType.ID_WORKER)
+    @TableId(value = "dept_id", type = IdType.AUTO)
     private Long deptId;
 
     /**
