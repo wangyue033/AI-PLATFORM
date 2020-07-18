@@ -4,30 +4,30 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.ai.entity.Model">
-        <id column="id" property="id" />
-        <result column="mod_code" property="modCode" />
-        <result column="mod_name" property="modName" />
-        <result column="description" property="description" />
-        <result column="ranged" property="ranged" />
-        <result column="version" property="version" />
-        <result column="load_id" property="loadId" />
-        <result column="load_name" property="loadName" />
-        <result column="load_location" property="loadLocation" />
-        <result column="document_id" property="documentId" />
-        <result column="document_name" property="documentName" />
-        <result column="document_location" property="documentLocation" />
-        <result column="data_owner" property="dataOwner" />
-        <result column="in_params" property="inParams" />
-        <result column="result" property="result" />
-        <result column="state" property="state" />
-        <result column="create_user" property="createUser" />
-        <result column="create_time" property="createTime" />
-        <result column="reviewer" property="reviewer" />
-        <result column="review_time" property="reviewTime" />
-        <result column="review_opinion" property="reviewOpinion" />
-        <result column="share_target" property="shareTarget" />
-        <result column="remark" property="remark" />
-        <result column="is_open" property="isOpen" />
+        <id column="id" property="id"/>
+        <result column="mod_code" property="modCode"/>
+        <result column="mod_name" property="modName"/>
+        <result column="description" property="description"/>
+        <result column="ranged" property="ranged"/>
+        <result column="version" property="version"/>
+        <result column="load_id" property="loadId"/>
+        <result column="load_name" property="loadName"/>
+        <result column="load_location" property="loadLocation"/>
+        <result column="document_id" property="documentId"/>
+        <result column="document_name" property="documentName"/>
+        <result column="document_location" property="documentLocation"/>
+        <result column="data_owner" property="dataOwner"/>
+        <result column="in_params" property="inParams"/>
+        <result column="result" property="result"/>
+        <result column="state" property="state"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="reviewer" property="reviewer"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="review_opinion" property="reviewOpinion"/>
+        <result column="share_target" property="shareTarget"/>
+        <result column="remark" property="remark"/>
+        <result column="is_open" property="isOpen"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -35,8 +35,14 @@
         id AS "id", mod_code AS "modCode", mod_name AS "modName", description AS "description", ranged AS "ranged", version AS "version", load_id AS "loadId", load_name AS "loadName", load_location AS "loadLocation", document_id AS "documentId", document_name AS "documentName", document_location AS "documentLocation", data_owner AS "dataOwner", in_params AS "inParams", result AS "result", state AS "state", create_user AS "createUser", create_time AS "createTime", reviewer AS "reviewer", review_time AS "reviewTime", review_opinion AS "reviewOpinion", share_target AS "shareTarget", remark AS "remark", is_open AS "isOpen"
     </sql>
 
+    <sql id="Full_Column_List">
+        ta.id AS "id", ta.mod_code AS "modCode", ta.mod_name AS "modName", ta.description AS "description", ta.ranged AS "ranged", ta.version AS "version", ta.load_location AS "loadLocation", ta.document_location AS "documentLocation", ta.data_owner AS "dataOwner", ta.in_params AS "inParams",
+        ta.result AS "result", ta.state AS "state", ta.create_user AS "createUser", ta.create_time AS "createTime", ta.reviewer AS "reviewer", ta.review_time AS "reviewTime",ta.review_opinion AS "reviewOpinion", ta.share_target AS "shareTarget", ta.remark AS "remark",
+        su.name as "createUserName" , sur.name as "reviewerName",ta.is_open as "isOpen"
+    </sql>
 
-    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.ModelResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
+    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.ModelResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
         select
         <include refid="Base_Column_List"/>
         from tb_model where 1 = 1
@@ -48,22 +54,55 @@
         from tb_model where 1 = 1
     </select>
 
-    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ModelResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ModelResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
         select
-        <include refid="Base_Column_List"/>
-        from tb_model tm where 1 = 1 and tm.state != 'DELETED'
+        <include refid="Full_Column_List"/>
+        from tb_model ta
+        left join sys_user su on ta.create_user = su.user_id
+        left join sys_user sur on ta.reviewer = sur.user_id
+        where 1 = 1 and ta.state != 'DELETED'
         <if test="paramCondition.modCode != null and paramCondition.modCode != ''">
-            and tm.mod_code like CONCAT('%',#{paramCondition.modCode},'%')
+            and ta.mod_code like CONCAT('%',#{paramCondition.modCode},'%')
         </if>
         <if test="paramCondition.modName != null and paramCondition.modName != ''">
-            and tm.mod_name like CONCAT('%',#{paramCondition.modName},'%')
+            and ta.mod_name like CONCAT('%',#{paramCondition.modName},'%')
         </if>
+        order by ta.id desc
     </select>
 
-    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
         select
         <include refid="Base_Column_List"/>
         from tb_model where 1 = 1
+    </select>
+
+
+    <select id="commonCustomPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ModelResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ModelParam">
+        select
+        <include refid="Full_Column_List"/>
+        from tb_model ta
+        left join sys_user su on ta.create_user = su.user_id
+        left join sys_user sur on ta.reviewer = sur.user_id
+        where 1 = 1 and ta.state != 'DELETED'
+        <if test="paramCondition.modCode != null and paramCondition.modCode != ''">
+            and ta.mod_code like CONCAT('%',#{paramCondition.modCode},'%')
+        </if>
+        <if test="paramCondition.modName != null and paramCondition.modName != ''">
+            and ta.mod_name like CONCAT('%',#{paramCondition.modName},'%')
+        </if>
+        and (
+        ta.is_open='on'
+        or (
+        ta.share_target like CONCAT('%',#{shareTarget},'%')
+        or ta.create_user = #{createId}
+        )
+        )
+        order by ta.id desc
     </select>
 
 </mapper>

@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /ai
+    context-path: /aix
 
 # Mysql数据库
 spring:
@@ -11,7 +11,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   cas:
-    server-name: http://192.168.24.48:8088/ai
+    server-name: http://192.168.67.117:8088/aix
     cas-server-url-prefix: http://192.168.67.117:8080/cas
     cas-server-login-url: http://192.168.67.117:8080/cas/login
     cas-server-logout-url: http://192.168.67.117:8080/cas/logout

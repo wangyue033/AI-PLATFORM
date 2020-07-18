@@ -81,7 +81,7 @@
     </select>
 
 
-    <select id="CommonCustomPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.AlgorithmResult"
+    <select id="commonCustomPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.AlgorithmResult"
             parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmParam">
         select
         <include refid="Full_Column_List"/>

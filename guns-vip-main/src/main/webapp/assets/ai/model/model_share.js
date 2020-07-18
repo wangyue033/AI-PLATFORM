@@ -125,7 +125,7 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects', 'selectPlu
 
 
     //获取用户列表信息，填充多选框
-    var ajax1 = new $ax(Feng.ctxPath + "/model/userList");
+    var ajax1 = new $ax(Feng.ctxPath + "/algorithm/userList");
     var result1= ajax1.start();
 
     console.log("shareTarget:"+result.data.shareTarget)

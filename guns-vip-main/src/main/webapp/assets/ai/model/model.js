@@ -36,20 +36,22 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             {field: 'loadId', hide: true, sort: true, title: '模型文件ID'},
             {field: 'loadName', hide: true, sort: true, title: '模型文件名称'},
             {field: 'loadLocation', hide: true, sort: true, title: '模型文件保存地址'},
-            {field: 'documentId',  hide: true,sort: true, title: '文档ID'},
+            {field: 'documentId', hide: true, sort: true, title: '文档ID'},
             {field: 'documentName', hide: true, sort: true, title: '模型使用文档名称'},
             {field: 'documentLocation', hide: true, sort: true, title: '模型使用文档说明'},
             {field: 'dataOwner', hide: true, sort: true, title: '数据归属'},
             {field: 'inParams', hide: true, sort: true, title: '入参说明'},
             {field: 'result', hide: true, sort: true, title: '结果说明'},
             {field: 'state', sort: true, title: '状态'},
-            {field: 'createUser', sort: true, title: '模型创建者'},
+            {field: 'createUser', hide: true, sort: true, title: '模型创建者'},
+            {field: 'createUserName', sort: true, title: '模型创建者'},
             {field: 'createTime', sort: true, title: '创建时间'},
-            {field: 'reviewer', sort: true, title: '模型审核人员'},
+            {field: 'reviewer', hide: true, sort: true, title: '模型审核人员'},
+            {field: 'reviewerName', sort: true, title: '模型审核人员'},
             {field: 'reviewTime', sort: true, title: '审核时间'},
             {field: 'reviewOpinion', hide: true, sort: true, title: '审核意见'},
             {field: 'shareTarget', hide: true, sort: true, title: '分享对象'},
-            {field: 'remark',  hide: true,sort: true, title: '备注'},
+            {field: 'remark', hide: true, sort: true, title: '备注'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 400}
         ]];
     };
@@ -76,10 +78,10 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     };
 
     /**
-    * 跳转到编辑页面
-    *
-    * @param data 点击按钮时候的行数据
-    */
+     * 跳转到编辑页面
+     *
+     * @param data 点击按钮时候的行数据
+     */
     Model.jumpEditPage = function (data) {
         if (data.state !== "待提交" && data.state !== "审核不通过") {
             Feng.error(data.state + "状态的记录不允许修改!");
@@ -201,7 +203,6 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     };
 
 
-
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + Model.tableId,
@@ -220,7 +221,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
     // 添加按钮点击事件
     $('#btnAdd').click(function () {
 
-    Model.jumpAddPage();
+        Model.jumpAddPage();
 
     });
 
