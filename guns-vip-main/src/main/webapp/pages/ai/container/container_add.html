@@ -1,0 +1,102 @@
+@layout("/common/_form.html",{js:["/assets/ai/container/container_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="containerForm" lay-filter="containerForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">容器编号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="containerCode" name="containerCode" placeholder="请输入容器编号" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">容器名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="containerName" name="containerName" placeholder="请输入容器名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+<!--                    <div class="layui-inline layui-col-md12">-->
+<!--                        <label class="layui-form-label">容器类型<span style="color: red;">*</span></label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input id="containerType" name="containerType" placeholder="请输入容器类型" type="text" class="layui-input" lay-verify="required" required/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="layui-form-item">-->
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">容器类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select id="containerType" name="containerType" lay-filter="dataSourceId" lay-verify="required" required >
+                                <option value=""></option>
+                                @for(item in containerTypes!){
+                                <option value="${item.name}">${item.name}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">版本号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="containerVersion" name="containerVersion" placeholder="请输入版本号" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">存放路径<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="containerLocation" name="containerLocation" placeholder="请输入存放路径" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">IP地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="serverHost" name="serverHost" placeholder="请输入IP地址" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">端口号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="serverPort" name="serverPort" placeholder="请输入端口号" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">管理账户<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="account" name="account" placeholder="请输入管理账户" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">密码<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="password" name="password" placeholder="请输入密码" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">使用描述</label>
+                        <div class="layui-input-block">
+                            <input id="description" name="description" placeholder="请输入使用描述" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}
