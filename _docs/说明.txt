@@ -11,3 +11,9 @@ WebSecurityConfig
 _header.html  切换退出方式
 
 4.注销index.html 118行退出方法  不执行原框架退出方法
+
+5 修改_footer.html  修改版本号并且重新install
+
+6 修改application.yml     active: produce
+
+7 clean install

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.ai.mapper.ServerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.ai.entity.Server">
+        <id column="id" property="id"/>
+        <result column="server_code" property="serverCode"/>
+        <result column="server_name" property="serverName"/>
+        <result column="algorithm_id" property="algorithmId"/>
+        <result column="model_id" property="modelId"/>
+        <result column="description" property="description"/>
+        <result column="ranged" property="ranged"/>
+        <result column="version" property="version"/>
+        <result column="load_location" property="loadLocation"/>
+        <result column="document_location" property="documentLocation"/>
+        <result column="deploy_use" property="deployUse"/>
+        <result column="container_id" property="containerId"/>
+        <result column="data_owner" property="dataOwner"/>
+        <result column="in_params" property="inParams"/>
+        <result column="result" property="result"/>
+        <result column="server_address" property="serverAddress"/>
+        <result column="server_monitor" property="serverMonitor"/>
+        <result column="state" property="state"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="reviewer" property="reviewer"/>
+        <result column="review_time" property="reviewTime"/>
+        <result column="review_opinion" property="reviewOpinion"/>
+        <result column="deploy_time" property="deployTime"/>
+        <result column="deployer" property="deployer"/>
+        <result column="remark" property="remark"/>
+        <result column="is_open" property="isOpen"/>
+        <result column="share_target" property="shareTarget"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", server_code AS "serverCode", server_name AS "serverName", algorithm_id AS "algorithmId", model_id AS "modelId", description AS "description", ranged AS "ranged", version AS "version", load_location AS "loadLocation", document_location AS "documentLocation", deploy_use AS "deployUse", container_id AS "containerId", data_owner AS "dataOwner", in_params AS "inParams", result AS "result", server_address AS "serverAddress", server_monitor AS "serverMonitor", state AS "state", create_user AS "createUser", create_time AS "createTime", reviewer AS "reviewer", review_time AS "reviewTime", review_opinion AS "reviewOpinion", deploy_time AS "deployTime", deployer AS "deployer", remark AS "remark"
+    </sql>
+
+    <sql id="Base_Column_List_1">
+        ts.id AS "id", ts.server_code AS "serverCode", ts.server_name AS "serverName", ts.algorithm_id AS "algorithmId", ts.model_id AS "modelId", ts.description AS "description", ts.ranged AS "ranged", ts.version AS "version",
+         ts.load_location AS "loadLocation", ts.document_location AS "documentLocation", ts.deploy_use AS "deployUse", ts.container_id AS "containerId", ts.data_owner AS "dataOwner", ts.in_params AS "inParams",
+         ts.result AS "result", ts.server_address AS "serverAddress", ts.server_monitor AS "serverMonitor", ts.state AS "state", ts.create_user AS "createUser", ts.create_time AS "createTime", ts.reviewer AS "reviewer",
+         ts.review_time AS "reviewTime", ts.review_opinion AS "reviewOpinion", ts.deploy_time AS "deployTime", ts.deployer AS "deployer", ts.remark AS "remark" , su.name as "createUserName" , ts.is_open AS "isOpen",
+         ts.share_target AS "shareTarget"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.ServerResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ServerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server where 1 = 1
+        <if test="paramCondition.serverCode != null and paramCondition.serverCode != ''">
+            and server_code like CONCAT('%',#{paramCondition.serverCode},'%')
+        </if>
+        <if test="paramCondition.serverName != null and paramCondition.serverName != ''">
+            and server_name like CONCAT('%',#{paramCondition.serverName},'%')
+        </if>
+        <if test="paramCondition.serverAddress != null and paramCondition.serverAddress != ''">
+            and server_address like CONCAT('%',#{paramCondition.serverAddress},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.ServerParam">
+        select
+        <include refid="Base_Column_List_1"/>
+        from tb_server ts
+        left join sys_user su on ts.create_user = su.user_id
+        where 1 = 1
+        <if test="paramCondition.serverCode != null and paramCondition.serverCode != ''">
+            and ts.server_code like CONCAT('%',#{paramCondition.serverCode},'%')
+        </if>
+        <if test="paramCondition.serverName != null and paramCondition.serverName != ''">
+            and (
+            ts.server_name like CONCAT('%',#{paramCondition.serverName},'%')
+            or
+            ts.server_address like CONCAT('%',#{paramCondition.serverName},'%')
+            )
+        </if>
+        <if test="paramCondition.serverAddress != null and paramCondition.serverAddress != ''">
+            and ts.server_address like CONCAT('%',#{paramCondition.serverAddress},'%')
+        </if>
+        order by ts.id desc
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ServerResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ServerParam">
+        select
+        <include refid="Base_Column_List_1"/>
+        from tb_server ts
+        left join sys_user su on ts.create_user = su.user_id
+        where 1 = 1
+        <if test="paramCondition.serverCode != null and paramCondition.serverCode != ''">
+            and ts.server_code like CONCAT('%',#{paramCondition.serverCode},'%')
+        </if>
+        <if test="paramCondition.serverName != null and paramCondition.serverName != ''">
+            and (
+            ts.server_name like CONCAT('%',#{paramCondition.serverName},'%')
+            or
+            ts.server_address like CONCAT('%',#{paramCondition.serverName},'%')
+            )
+        </if>
+        <if test="paramCondition.serverAddress != null and paramCondition.serverAddress != ''">
+            and ts.server_address like CONCAT('%',#{paramCondition.serverAddress},'%')
+        </if>
+        order by ts.id desc
+    </select>
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ServerParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server where 1 = 1
+        <if test="paramCondition.serverCode != null and paramCondition.serverCode != ''">
+            and server_code like CONCAT('%',#{paramCondition.serverCode},'%')
+        </if>
+        <if test="paramCondition.serverName != null and paramCondition.serverName != ''">
+            and server_name like CONCAT('%',#{paramCondition.serverName},'%')
+        </if>
+        <if test="paramCondition.serverAddress != null and paramCondition.serverAddress != ''">
+            and server_address like CONCAT('%',#{paramCondition.serverAddress},'%')
+        </if>
+    </select>
+
+</mapper>

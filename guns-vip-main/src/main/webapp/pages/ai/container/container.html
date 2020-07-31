@@ -12,18 +12,22 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <input id="containerCode" class="layui-input" type="text" placeholder="容器编号"/>
+                                <input id="containerCode" class="layui-input" type="hidden" placeholder="容器编号"/>
                             </div>
                             <div class="layui-inline">
-                                <input id="containerName" class="layui-input" type="text" placeholder="容器名称"/>
+                                <input id="containerName" class="layui-input" type="text" placeholder="关键字搜索"/>
                             </div>
                             <div class="layui-inline">
-                                <input id="serverHost" class="layui-input" type="text" placeholder="IP地址"/>
+                                <input id="serverHost" class="layui-input" type="hidden" placeholder="IP地址"/>
                             </div>
                             <div class="layui-inline">
-                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
-<!--                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("/container/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加
+                                </button>
+                                @}
+                                <!--                                <button id="btnExp" class="layui-btn icon-btn"><i class="layui-icon">&#xe67d;</i>导出</button>-->
                             </div>
                         </div>
                     </div>
@@ -35,10 +39,20 @@
 </div>
 
 <script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/container/edit")){
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/container/delete")){
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+    @if(shiro.hasPermission("/container/startup")){
     <a class="layui-btn layui-btn-checked layui-btn-xs" lay-event="startup">启动</a>
+    @}
+    @if(shiro.hasPermission("/container/detail")){
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="view">查看</a>
+    @}
+    @if(shiro.hasPermission("/container/shutdown")){
     <a class="layui-btn layui-btn-radius layui-btn-xs" lay-event="shutdown">关闭</a>
+    @}
 </script>
 @}

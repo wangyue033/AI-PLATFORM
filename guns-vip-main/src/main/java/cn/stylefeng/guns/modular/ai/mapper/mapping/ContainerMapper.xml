@@ -58,19 +58,35 @@
             </if>
     </select>
 
+<!--    <select id="customPageList-bak" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List"/>-->
+<!--        from tb_container where 1 = 1-->
+<!--            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">-->
+<!--                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')-->
+<!--            </if>-->
+<!--            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">-->
+<!--                and container_name like CONCAT('%',#{paramCondition.containerName},'%')-->
+<!--            </if>-->
+<!--            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">-->
+<!--                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')-->
+<!--            </if>-->
+<!--    </select>-->
+
+
     <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
         select
         <include refid="Base_Column_List"/>
         from tb_container where 1 = 1
-            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
-                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
-            </if>
-            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
-                and container_name like CONCAT('%',#{paramCondition.containerName},'%')
-            </if>
-            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
-                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
-            </if>
+        <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
+            and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
+        </if>
+        <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
+            and (container_name like CONCAT('%',#{paramCondition.containerName},'%')
+            or server_address like CONCAT('%',#{paramCondition.containerName},'%')
+            )
+        </if>
+
     </select>
 
     <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
