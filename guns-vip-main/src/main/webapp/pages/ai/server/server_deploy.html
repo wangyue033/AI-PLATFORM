@@ -1,35 +1,36 @@
-@layout("/common/_form.html",{js:["/assets/ai/server/server_share.js"]}){
+@layout("/common/_form.html",{js:["/assets/ai/server/server_deploy.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
 
 <form class="layui-form" id="serverForm" lay-filter="serverForm">
     <div class="layui-fluid" style="padding-bottom: 75px;">
         <div class="layui-card">
-            <div class="layui-card-header">分享服务运行信息</div>
+            <div class="layui-card-header">部署服务运行</div>
             <div class="layui-card-body">
                 <div class="layui-form-item layui-row">
                     <input name="id" type="hidden"/>
 
-
                     <div class="layui-form-item">
-                        <label class="layui-form-label">服务容器</label>
-                        <input id="shareTarget" name="shareTarget" type="hidden" class="layui-input"/>
-                        <div class="layui-input-block" id="multiSelect" lay-filter="multiSelect"></div>
-                    </div>
-
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">单行选择框</label>
+                        <label class="layui-form-label">选择服务容器</label>
                         <div class="layui-input-block">
-                            <select name="simpleSelect" lay-filter="simpleSelect">
+                            <select id="containerId" name="containerId" lay-filter="containerId" lay-verify="required" required >
                                 <option value=""></option>
-                                <option value="0">写作</option>
-                                <option value="1" selected="">阅读</option>
-                                <option value="2">游戏</option>
-                                <option value="3">音乐</option>
-                                <option value="4">旅行</option>
+                                @for(item in containers!){
+                                <option value="${item.id}">${item.containerName}-----${item.serverAddress}</option>
+                                @}
                             </select>
                         </div>
                     </div>
 
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">进入部署页面</label>
+                        <div class="layui-input-block">
+                            <div style="float: left;">
+                                <button type="button" class="layui-btn layui-btn-sm" id="deployBtn"><i class="layui-icon">&#xe67d;</i>点击部署</button>
+                            </div>
+                            <div style="float: left;">
+                                <span class="layui-inline layui-upload-choose" style="padding: 4px 10px;" id="serverAddressTip"></span>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="layui-inline layui-col-md12">
@@ -91,47 +92,10 @@
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">是否公开</label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" name="isOpen" lay-skin="switch" lay-text="是|否">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">是否运行</label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" name="deployUse" lay-skin="switch" lay-text="是|否">
-                        </div>
-                    </div>
                     <div class="layui-inline layui-col-md12">
                         <label class="layui-form-label">服务描述</label>
                         <div class="layui-input-block">
                             <input id="description" name="description" placeholder="" type="text" class="layui-input"  readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">使用范围 </label>
-                        <div class="layui-input-block">
-                            <input id="ranged" name="ranged" placeholder="" type="text" class="layui-input"  readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">数据归属</label>
-                        <div class="layui-input-block">
-                            <input id="dataOwner" name="dataOwner" placeholder=" " type="text" class="layui-input"  readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">入参说明</label>
-                        <div class="layui-input-block">
-                            <input id="inParams" name="inParams" placeholder=" " type="text" class="layui-input"  readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">结果说明</label>
-                        <div class="layui-input-block">
-                            <input id="result" name="result" placeholder="请输入结果说明" type="text" class="layui-input"  readonly="readonly"/>
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
@@ -152,7 +116,7 @@
         </div>
     </div>
     <div class="form-group-bottom text-center">
-        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;分享&emsp;</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;部署&emsp;</button>
         <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;关闭&emsp;</button>
     </div>
 

@@ -220,8 +220,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
      * @param data 点击部署时候的行数据
      */
     Server.jumpDeployPage = function (data) {
-        if (data.state !== "审核通过") {
-            Feng.error("非【审核通过】状态的服务不允许部署!");
+        if (data.state !== "审核通过"&&data.state !== "已部署") {
+            Feng.error("【审核通过】状态之后的服务才允许部署!");
             return
         }
         window.location.href = Feng.ctxPath + '/server/deployPage?id=' + data.id
@@ -255,6 +255,18 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
         Server.exportExcel();
     });
 
+    /**
+     * 跳转到监控页面
+     */
+    Server.jumpMonitorPage = function (data) {
+        func.open({
+            title: "服务容器监控: "+data.serverMonitor,
+            content: data.serverMonitor,
+            resize: true
+        });
+    };
+
+
     // 工具条点击事件
     table.on('tool(' + Server.tableId + ')', function (obj) {
         var data = obj.data;
@@ -276,6 +288,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             Server.jumpSharePage(data);
         } else if (layEvent === 'deploy') {
             Server.jumpDeployPage(data);
+        } else if (layEvent === 'monitor') {
+            Server.jumpMonitorPage(data);
         }
     });
 });

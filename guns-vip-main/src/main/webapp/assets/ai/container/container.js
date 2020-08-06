@@ -186,6 +186,10 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             Feng.error("当前容器未启动，请先启动!");
             return
         }
+        if (data.containerType !== "tomcat") {
+            Feng.error("监控页面开发中!");
+            return
+        }
         // window.location.href = data.serverAddress
         //新开页面
         // window.open(data.serverAddress)

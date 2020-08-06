@@ -1,5 +1,5 @@
 /**
- * 添加或者修改页面
+ * 详情对话框
  */
 var ServerInfoDlg = {
     data: {
@@ -32,19 +32,20 @@ var ServerInfoDlg = {
         reviewOpinion: "",
         deployTime: "",
         deployer: "",
-        remark: ""
+        remark: "",
+        isOpen: ""
     }
 };
 
-layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function () {
+layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects', 'func'], function () {
     var $ = layui.jquery;
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
     var upload = layui.upload;
+    var func = layui.func;
 
-
-//上传服务文件
+//上传模型文件
     upload.render({
         elem: '#fileBtn'
         , url: Feng.ctxPath + '/file/server/upload'
@@ -66,7 +67,7 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function 
     });
 
 
-//上传算法说明文档
+//上传服务说明文档
     upload.render({
         elem: '#documentBtn'
         , url: Feng.ctxPath + '/file/serverDocument/upload'
@@ -87,7 +88,7 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function 
         }
     });
 
-    // 下载算法文件
+    // 下载服务文件
     $('#fileDownBtn').click(function () {
         var loadId = $("#loadId").val();
         if (loadId === "") {
@@ -97,7 +98,7 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function 
         window.location.href = Feng.ctxPath + "/file/server/download/" + loadId;
     });
 
-    // 下载算法说明文件
+    // 下载服务说明文件
     $('#documentDownBtn').click(function () {
         var documentId = $("#documentId").val();
         if (documentId === "") {
@@ -108,13 +109,42 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function 
     });
 
 
+    // 点击部署按钮，弹出服务部署页面
+    $('#deployBtn').click(function () {
+        var serverAddressTip = $("#serverAddressTip").text();
+        console.log("serverAddressTip: "+serverAddressTip);
+        if (serverAddressTip === "") {
+            Feng.error("请先选择服务容器");
+            return
+        }
+        func.open({
+            title: "服务容器管理页面: "+serverAddressTip,
+            content: serverAddressTip,
+            resize: true
+        });
+    });
+
+
+
+    //获取详情信息，填充表单
+    var ajax = new $ax(Feng.ctxPath + "/server/detail?id=" + Feng.getUrlParam("id"));
+    var result = ajax.start();
+    form.val('serverForm', result.data);
+    $("#fileNameTip").html(result.data.loadName);
+    $("#documentNameTip").html(result.data.documentName);
+
     //表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/server/addItem", function (data) {
-            Feng.success("添加成功！");
-            window.location.href = Feng.ctxPath + '/server'
+        var ajax = new $ax(Feng.ctxPath + "/server/deployItem", function (data) {
+            if (data.code === 500) {
+                Feng.error(data.message)
+                return false;
+            } else {
+                Feng.success("部署成功！");
+                window.location.href = Feng.ctxPath + '/server'
+            }
         }, function (data) {
-            Feng.error("添加失败！" + data.responseJSON.message)
+            Feng.error("部署失败！" + data.responseJSON.message)
         });
         ajax.set(data.field);
         ajax.start();
@@ -126,4 +156,8 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects'], function 
         window.location.href = Feng.ctxPath + '/server'
     });
 
+    form.on('select(containerId)', function (data) {
+        var serverAddress = data.elem[data.elem.selectedIndex].text.split("-----")[1];
+        $("#serverAddressTip").html(serverAddress);
+    });
 });
