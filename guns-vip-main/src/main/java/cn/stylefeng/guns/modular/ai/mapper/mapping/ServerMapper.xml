@@ -13,6 +13,7 @@
         <result column="ranged" property="ranged"/>
         <result column="version" property="version"/>
         <result column="load_location" property="loadLocation"/>
+        <result column="load_type" property="loadType"/>
         <result column="document_location" property="documentLocation"/>
         <result column="deploy_use" property="deployUse"/>
         <result column="container_id" property="containerId"/>
@@ -44,7 +45,7 @@
          ts.load_location AS "loadLocation", ts.document_location AS "documentLocation", ts.deploy_use AS "deployUse", ts.container_id AS "containerId", ts.data_owner AS "dataOwner", ts.in_params AS "inParams",
          ts.result AS "result", ts.server_address AS "serverAddress", ts.server_monitor AS "serverMonitor", ts.state AS "state", ts.create_user AS "createUser", ts.create_time AS "createTime", ts.reviewer AS "reviewer",
          ts.review_time AS "reviewTime", ts.review_opinion AS "reviewOpinion", ts.deploy_time AS "deployTime", ts.deployer AS "deployer", ts.remark AS "remark" , su.name as "createUserName" , ts.is_open AS "isOpen",
-         ts.share_target AS "shareTarget"
+         ts.share_target AS "shareTarget",ts.load_type as "loadType" , tc.server_address as "containerAddress"
     </sql>
 
 
@@ -92,6 +93,7 @@
         <include refid="Base_Column_List_1"/>
         from tb_server ts
         left join sys_user su on ts.create_user = su.user_id
+        left join tb_container tc on ts.container_id = tc.id
         where 1 = 1
         <if test="paramCondition.serverCode != null and paramCondition.serverCode != ''">
             and ts.server_code like CONCAT('%',#{paramCondition.serverCode},'%')
