@@ -98,8 +98,16 @@
         and (
         ta.is_open='on'
         or (
-        ta.share_target like CONCAT('%',#{shareTarget},'%')
-        or ta.create_user = #{createId}
+        ta.create_user = #{createId}
+        or ta.id IN (
+        SELECT
+        record_id
+        FROM
+        tb_share_relation tsr
+        WHERE
+        tsr.user_id =  #{createId}
+        AND tsr.record_type = 'MODEL'
+        )
         )
         )
         order by ta.id desc

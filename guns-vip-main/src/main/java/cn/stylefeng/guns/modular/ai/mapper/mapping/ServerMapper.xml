@@ -127,4 +127,38 @@
         </if>
     </select>
 
+    <select id="commonCustomPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ServerResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ServerParam">
+        select
+        <include refid="Base_Column_List_1"/>
+        from tb_server ts
+        left join sys_user su on ts.create_user = su.user_id
+        left join sys_user sur on ts.reviewer = sur.user_id
+        left join tb_container tc on ts.container_id = tc.id
+        where 1 = 1 and ts.state != 'DELETED'
+        <if test="paramCondition.serverName != null and paramCondition.serverName != ''">
+            and (
+            ts.server_name like CONCAT('%',#{paramCondition.serverName},'%')
+            or
+            ts.server_address like CONCAT('%',#{paramCondition.serverName},'%')
+            )
+        </if>
+        and (
+        ts.is_open='on'
+        or (
+        ts.create_user = #{createId}
+        or ts.id IN (
+        SELECT
+        record_id
+        FROM
+        tb_share_relation tsr
+        WHERE
+        tsr.user_id =  #{createId}
+        AND tsr.record_type = 'SERVER'
+        )
+        )
+        )
+        order by ts.id desc
+    </select>
+
 </mapper>

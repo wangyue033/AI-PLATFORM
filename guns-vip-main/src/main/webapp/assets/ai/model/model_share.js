@@ -133,7 +133,7 @@ layui.use(['form', 'admin', 'ax', 'laydate', 'upload', 'formSelects', 'selectPlu
     var test = selectPlus.render({
         el: '#multiSelect',
         data: result1.data,
-        valueName: "name",
+        valueName: "id",
         values: result.data.shareTarget.split(","),
         valueSeparator: " --- "
     });
