@@ -193,7 +193,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             return
         }
         /*jar启动*/
-        if (data.loadType === "jar") {
+        if (data.loadType === "jar"||data.loadType === "py") {
             if (data.state !== "审核通过"&&data.state !== "停止运行") {
                 Feng.error("【审核通过】或【停止运行】状态之后的服务才允许启动!");
                 return
@@ -238,7 +238,7 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             return
         }
         /*jar启动*/
-        if (data.loadType === "jar") {
+        if (data.loadType === "jar"||data.loadType === "py") {
             if (data.state !== "审核通过"&&data.state !== "正在运行") {
                 Feng.error("【审核通过】或【正在运行】状态之后的服务才允许停止!");
                 return
