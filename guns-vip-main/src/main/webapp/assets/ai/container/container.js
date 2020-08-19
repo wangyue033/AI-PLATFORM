@@ -182,14 +182,6 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
      * 跳转到查看页面
      */
     Container.onViewItem = function (data) {
-        if (data.containerType === "docker") {
-            func.open({
-                title: "查看服务容器: "+data.serverAddress,
-                content: data.serverAddress,
-                resize: true
-            });
-            return
-        }
         if (data.status !== "启动") {
             Feng.error("当前容器未启动，请先启动!");
             return
