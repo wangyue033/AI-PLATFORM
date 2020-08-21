@@ -178,6 +178,30 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
      * @param data 点击按钮时候的行数据
      */
     Server.onStartUpItem = function (data) {
+        /*rar zip打包的python文件启动*/
+        if (data.loadType === "rar" || data.loadType === "zip") {
+            if (data.state !== "已部署"&& data.state !== "停止运行") {
+                Feng.error("【已部署】或【停止运行】状态之后的服务才允许启动!");
+                return
+            }
+            var operation = function () {
+                var ajax = new $ax(Feng.ctxPath + "/server/startUp", function (data) {
+                    if (data.code === 500) {
+                        Feng.error(data.message)
+                        return false;
+                    } else {
+                        Feng.success("启动成功!");
+                        table.reload(Server.tableId);
+                    }
+                }, function (data) {
+                    Feng.error("启动失败!" + data.responseJSON.message + "!");
+                });
+                ajax.set("id", data.id);
+                ajax.start();
+            };
+            Feng.confirm("是否启动?", operation);
+            return
+        }
 
         /*war 包启动*/
         if (data.loadType === "war") {
@@ -193,8 +217,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             return
         }
         /*jar启动*/
-        if (data.loadType === "jar"||data.loadType === "py") {
-            if (data.state !== "审核通过"&&data.state !== "停止运行") {
+        if (data.loadType === "jar" || data.loadType === "py") {
+            if (data.state !== "审核通过" && data.state !== "停止运行") {
                 Feng.error("【审核通过】或【停止运行】状态之后的服务才允许启动!");
                 return
             }
@@ -238,9 +262,33 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
             return
         }
         /*jar启动*/
-        if (data.loadType === "jar"||data.loadType === "py") {
-            if (data.state !== "审核通过"&&data.state !== "正在运行") {
+        if (data.loadType === "jar" || data.loadType === "py") {
+            if (data.state !== "审核通过" && data.state !== "正在运行") {
                 Feng.error("【审核通过】或【正在运行】状态之后的服务才允许停止!");
+                return
+            }
+            var operation = function () {
+                var ajax = new $ax(Feng.ctxPath + "/server/shutdown", function (data) {
+                    if (data.code === 500) {
+                        Feng.error(data.message)
+                        return false;
+                    } else {
+                        Feng.success("停止成功!");
+                        table.reload(Server.tableId);
+                    }
+                }, function (data) {
+                    Feng.error("停止失败!" + data.responseJSON.message + "!");
+                });
+                ajax.set("id", data.id);
+                ajax.start();
+            };
+            Feng.confirm("是否停止?", operation);
+            return;
+        }
+        /*jar启动*/
+        if (data.loadType === "rar" || data.loadType === "zip") {
+            if (data.state !== "正在运行") {
+                Feng.error("【正在运行】状态之后的服务才允许停止!");
                 return
             }
             var operation = function () {
