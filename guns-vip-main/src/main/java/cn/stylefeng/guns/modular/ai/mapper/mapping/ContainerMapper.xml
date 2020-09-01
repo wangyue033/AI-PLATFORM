@@ -4,80 +4,93 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.ai.entity.Container">
-        <id column="id" property="id" />
-        <result column="container_code" property="containerCode" />
-        <result column="container_name" property="containerName" />
-        <result column="container_type" property="containerType" />
-        <result column="container_version" property="containerVersion" />
-        <result column="container_location" property="containerLocation" />
-        <result column="server_host" property="serverHost" />
-        <result column="server_port" property="serverPort" />
-        <result column="server_address" property="serverAddress" />
-        <result column="account" property="account" />
-        <result column="password" property="password" />
-        <result column="status" property="status" />
-        <result column="description" property="description" />
-        <result column="remark" property="remark" />
-        <result column="create_user" property="createUser" />
-        <result column="create_time" property="createTime" />
+        <id column="id" property="id"/>
+        <result column="container_code" property="containerCode"/>
+        <result column="container_name" property="containerName"/>
+        <result column="container_type" property="containerType"/>
+        <result column="container_version" property="containerVersion"/>
+        <result column="container_location" property="containerLocation"/>
+        <result column="server_host" property="serverHost"/>
+        <result column="server_port" property="serverPort"/>
+        <result column="server_address" property="serverAddress"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="remark" property="remark"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id AS "id", container_code AS "containerCode", container_name AS "containerName", container_type AS "containerType", container_version AS "containerVersion", container_location AS "containerLocation", server_host AS "serverHost", server_port AS "serverPort", server_address AS "serverAddress", account AS "account", password AS "password", status AS "status", description AS "description", remark AS "remark", create_user AS "createUser", create_time AS "createTime"
+        id AS "id",   container_code AS "containerCode",  container_name AS "containerName",  container_type AS "containerType",  container_version AS "containerVersion",
+        container_location AS "containerLocation",  server_host AS "serverHost",  server_port AS "serverPort",  server_address AS "serverAddress",  account AS "account", password AS "password",
+        status AS "status",  description AS "description", remark AS "remark",  create_user AS "createUser",  create_time AS "createTime"
+    </sql>
+
+    <sql id="Base_Column_List_1">
+        tc.id AS "id",  tc.container_code AS "containerCode", tc.container_name AS "containerName", tc.container_type AS "containerType", tc.container_version AS "containerVersion",
+        tc.container_location AS "containerLocation", tc.server_host AS "serverHost", tc.server_port AS "serverPort", tc.server_address AS "serverAddress", tc.account AS "account", tc.password AS "password",
+        tc.status AS "status", tc.description AS "description",tc.remark AS "remark", tc.create_user AS "createUser", tc.create_time AS "createTime", sd.name AS "stateName"
     </sql>
 
 
-    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
+    <select id="customList" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
         select
         <include refid="Base_Column_List"/>
         from tb_container where 1 = 1
-            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
-                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
-            </if>
-            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
-                and container_name like CONCAT('%',#{paramCondition.containerName},'%')
-            </if>
-            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
-                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
-            </if>
+        <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
+            and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
+        </if>
+        <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
+            and container_name like CONCAT('%',#{paramCondition.containerName},'%')
+        </if>
+        <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
+            and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
+        </if>
     </select>
 
-    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
         select
         <include refid="Base_Column_List"/>
         from tb_container where 1 = 1
-            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
-                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
-            </if>
-            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
-                and container_name like CONCAT('%',#{paramCondition.containerName},'%')
-            </if>
-            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
-                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
-            </if>
+        <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
+            and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
+        </if>
+        <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
+            and container_name like CONCAT('%',#{paramCondition.containerName},'%')
+        </if>
+        <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
+            and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
+        </if>
     </select>
 
-<!--    <select id="customPageList-bak" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">-->
-<!--        select-->
-<!--        <include refid="Base_Column_List"/>-->
-<!--        from tb_container where 1 = 1-->
-<!--            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">-->
-<!--                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')-->
-<!--            </if>-->
-<!--            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">-->
-<!--                and container_name like CONCAT('%',#{paramCondition.containerName},'%')-->
-<!--            </if>-->
-<!--            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">-->
-<!--                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')-->
-<!--            </if>-->
-<!--    </select>-->
+    <!--    <select id="customPageList-bak" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">-->
+    <!--        select-->
+    <!--        <include refid="Base_Column_List"/>-->
+    <!--        from tb_container where 1 = 1-->
+    <!--            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">-->
+    <!--                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')-->
+    <!--            </if>-->
+    <!--            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">-->
+    <!--                and container_name like CONCAT('%',#{paramCondition.containerName},'%')-->
+    <!--            </if>-->
+    <!--            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">-->
+    <!--                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')-->
+    <!--            </if>-->
+    <!--    </select>-->
 
 
-    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.ai.model.result.ContainerResult"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
         select
-        <include refid="Base_Column_List"/>
-        from tb_container where 1 = 1
+        <include refid="Base_Column_List_1"/>
+        from tb_container tc
+        left join sys_dict sd on tc.STATUS = sd.`code`
+        where 1 = 1
         <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
             and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
         </if>
@@ -89,19 +102,20 @@
 
     </select>
 
-    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.ai.model.params.ContainerParam">
         select
         <include refid="Base_Column_List"/>
         from tb_container where 1 = 1
-            <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
-                and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
-            </if>
-            <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
-                and container_name like CONCAT('%',#{paramCondition.containerName},'%')
-            </if>
-            <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
-                and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
-            </if>
+        <if test="paramCondition.containerCode != null and paramCondition.containerCode != ''">
+            and container_code like CONCAT('%',#{paramCondition.containerCode},'%')
+        </if>
+        <if test="paramCondition.containerName != null and paramCondition.containerName != ''">
+            and container_name like CONCAT('%',#{paramCondition.containerName},'%')
+        </if>
+        <if test="paramCondition.serverHost != null and paramCondition.serverHost != ''">
+            and server_host like CONCAT('%',#{paramCondition.serverHost},'%')
+        </if>
     </select>
 
 </mapper>

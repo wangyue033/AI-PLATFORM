@@ -50,6 +50,54 @@
             <version>1.0.0</version>
         </dependency>
 
+        <!-- 添加jedis依赖 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+        <!-- influxdb-->
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>2.15</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>1.6.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- zookeeper-->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.10</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- sqlserver -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0</version>
+        </dependency>
+
+
         <!-- oauth2认证 -->
         <dependency>
             <groupId>cn.stylefeng</groupId>
@@ -74,6 +122,7 @@
             <version>4.5.12</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 
@@ -109,7 +158,9 @@
                                     <descriptor>docker-assembly.xml</descriptor>
                                 </assembly>
                                 <cmd>
-                                    <shell>java -jar -Xms512m -Xmx512m -Xss1024K -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m /maven/${project.artifactId}.jar</shell>
+                                    <shell>java -jar -Xms512m -Xmx512m -Xss1024K -XX:MetaspaceSize=256m
+                                        -XX:MaxMetaspaceSize=256m /maven/${project.artifactId}.jar
+                                    </shell>
                                 </cmd>
                             </build>
                         </image>

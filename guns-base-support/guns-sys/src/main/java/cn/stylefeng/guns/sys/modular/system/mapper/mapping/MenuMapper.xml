@@ -450,4 +450,35 @@
         </foreach>
     </select>
 
+
+    <select id="getAuthorizationButtonsInfo" resultType="cn.stylefeng.guns.base.pojo.node.MenuNode">
+        SELECT
+        m1.menu_id AS id,
+        m1.code AS code,
+        m1.name as name,
+        m1.url as url
+        FROM
+        sys_menu m1
+        INNER JOIN (
+        SELECT
+        menu_id
+        FROM
+        sys_menu
+        WHERE
+        menu_id IN (
+        SELECT
+        menu_id
+        FROM
+        sys_relation rela
+        WHERE
+        rela.role_id IN
+        <foreach collection="list" index="index" item="i" open="(" separator="," close=")">
+            #{i}
+        </foreach>
+        )
+        ) m3 ON m1.menu_id = m3.menu_id
+        where m1.menu_flag = 'N'
+        order by m1.menu_id asc
+    </select>
+
 </mapper>

@@ -1,0 +1,94 @@
+@layout("/common/_form.html",{js:["/assets/database/apiInfo/apiInfo_add.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="apiInfoForm" lay-filter="apiInfoForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">标题<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="title" name="title" placeholder="请输入标题" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接口地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="apiAddress" name="apiAddress" placeholder="请输入接口地址" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">入参说明<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="inParams" name="inParams" placeholder="请输入入参说明" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">结果说明<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="result" name="result" placeholder="请输入结果说明" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接口描述<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="apiDesc" name="apiDesc" placeholder="请输入接口描述" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接口文档ID<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="documentId" name="documentId" placeholder="请输入接口文档ID" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接口文档名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="documentName" name="documentName" placeholder="请输入接口文档名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接口文档保存地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="documentLocation" name="documentLocation" placeholder="请输入接口文档保存地址" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">状态<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="state" name="state" placeholder="请输入状态" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">分享对象<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="shareTarget" name="shareTarget" placeholder="请输入分享对象" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">是否公开<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="isOpen" name="isOpen" placeholder="请输入是否公开" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

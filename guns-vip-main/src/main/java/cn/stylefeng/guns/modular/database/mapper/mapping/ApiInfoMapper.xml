@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.database.mapper.ApiInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.database.entity.ApiInfo">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="api_address" property="apiAddress" />
+        <result column="in_params" property="inParams" />
+        <result column="result" property="result" />
+        <result column="api_desc" property="apiDesc" />
+        <result column="document_id" property="documentId" />
+        <result column="document_name" property="documentName" />
+        <result column="document_location" property="documentLocation" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+        <result column="create_user" property="createUser" />
+        <result column="create_time" property="createTime" />
+        <result column="share_target" property="shareTarget" />
+        <result column="is_open" property="isOpen" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", title AS "title", api_address AS "apiAddress", in_params AS "inParams", result AS "result", api_desc AS "apiDesc", document_id AS "documentId", document_name AS "documentName", document_location AS "documentLocation", state AS "state", remark AS "remark", create_user AS "createUser", create_time AS "createTime", share_target AS "shareTarget", is_open AS "isOpen"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.database.model.result.ApiInfoResult" parameterType="cn.stylefeng.guns.modular.database.model.params.ApiInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_api_info where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.database.model.params.ApiInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_api_info where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.database.model.result.ApiInfoResult" parameterType="cn.stylefeng.guns.modular.database.model.params.ApiInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_api_info where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.database.model.params.ApiInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_api_info where 1 = 1
+            <if test="paramCondition.title != null and paramCondition.title != ''">
+                and title like CONCAT('%',#{paramCondition.title},'%')
+            </if>
+    </select>
+
+</mapper>

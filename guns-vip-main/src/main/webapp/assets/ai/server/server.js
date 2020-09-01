@@ -47,7 +47,8 @@ layui.use(['table', 'admin', 'ax', 'func'], function () {
                     }
                 }
             },
-            {field: 'state', sort: true, title: '状态'},
+            {field: 'state', sort: true, title: '状态编码'},
+            {field: 'stateName', sort: true, title: '状态'},
             {field: 'containerId', hide: true, sort: true, title: '容器ID'},
             {field: 'dataOwner', hide: true, sort: true, title: '数据归属'},
             {field: 'inParams', hide: true, sort: true, title: '入参说明'},

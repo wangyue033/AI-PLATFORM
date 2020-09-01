@@ -33,7 +33,7 @@
     <sql id="Full_Column_List">
         ta.id AS "id", ta.alg_code AS "algCode", ta.alg_name AS "algName", ta.description AS "description", ta.ranged AS "ranged", ta.version AS "version", ta.load_location AS "loadLocation", ta.document_location AS "documentLocation", ta.data_owner AS "dataOwner", ta.in_params AS "inParams",
         ta.result AS "result", ta.state AS "state", ta.create_user AS "createUser", ta.create_time AS "createTime", ta.reviewer AS "reviewer", ta.review_time AS "reviewTime",ta.review_opinion AS "reviewOpinion", ta.share_target AS "shareTarget", ta.remark AS "remark",
-        su.name as "createUserName" , sur.name as "reviewerName",ta.is_open as "isOpen"
+        su.name as "createUserName" , sur.name as "reviewerName",ta.is_open as "isOpen",sd.name AS "stateName"
     </sql>
 
 
@@ -70,6 +70,7 @@
         from tb_algorithm ta
         left join sys_user su on ta.create_user = su.user_id
         left join sys_user sur on ta.reviewer = sur.user_id
+        left join sys_dict sd on ta.state = sd.`code`
         where 1 = 1 and ta.state != 'DELETED'
         <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
             and ta.alg_code like CONCAT('%',#{paramCondition.algCode},'%')
@@ -88,6 +89,7 @@
         from tb_algorithm ta
         left join sys_user su on ta.create_user = su.user_id
         left join sys_user sur on ta.reviewer = sur.user_id
+        left join sys_dict sd on ta.state = sd.`code`
         where 1 = 1 and ta.state != 'DELETED'
         <if test="paramCondition.algCode != null and paramCondition.algCode != ''">
             and ta.alg_code like CONCAT('%',#{paramCondition.algCode},'%')
@@ -105,7 +107,7 @@
         FROM
         tb_share_relation tsr
         WHERE
-        tsr.user_id =  #{createId}
+        tsr.user_id = #{createId}
         AND tsr.record_type = 'ALGORITHM'
         )
         )

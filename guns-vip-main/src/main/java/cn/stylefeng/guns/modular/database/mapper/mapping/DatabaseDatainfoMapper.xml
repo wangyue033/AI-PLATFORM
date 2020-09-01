@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.database.mapper.DatabaseDatainfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.database.entity.DatabaseDatainfo">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="db_type" property="dbType"/>
+        <result column="jdbc_driver" property="jdbcDriver"/>
+        <result column="db_name" property="dbName"/>
+        <result column="version" property="version"/>
+        <result column="jdbc_url" property="jdbcUrl"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="state" property="state"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="share_target" property="shareTarget"/>
+        <result column="is_open" property="isOpen"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", title AS "title", db_type AS "dbType", jdbc_driver AS "jdbcDriver", db_name AS "dbName", version AS "version", jdbc_url AS "jdbcUrl", user_name AS "userName", password AS "password", state AS "state", remark AS "remark", create_time AS "createTime", create_user AS "createUser", share_target AS "shareTarget"
+    </sql>
+
+    <sql id="full_Column_List">
+        tdd.id AS "id", tdd.title AS "title", tdd.db_type AS "dbType", tdd.jdbc_driver AS "jdbcDriver", tdd.db_name AS "dbName", tdd.version AS "version", tdd.jdbc_url AS "jdbcUrl", tdd.user_name AS "userName",
+        tdd.password AS "password", tdd.state AS "state", tdd.remark AS "remark", tdd.create_time AS "createTime", tdd.create_user AS "createUser", tdd.share_target AS "shareTarget", su.name as "createUserName"
+        ,tdd.is_open as "isOpen"
+
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.database.model.result.DatabaseDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.DatabaseDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_database_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.DatabaseDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_database_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.database.model.result.DatabaseDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.DatabaseDatainfoParam">
+        select
+        <include refid="full_Column_List"/>
+        from tb_database_datainfo tdd
+        left join sys_user su on tdd.create_user = su.user_id
+        where 1 = 1 and tdd.state != 'DELETED'
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and (
+            title like CONCAT('%',#{paramCondition.title},'%')
+            or db_type like CONCAT('%',#{paramCondition.title},'%')
+            or jdbc_url like CONCAT('%',#{paramCondition.title},'%')
+            )
+        </if>
+        order by id desc
+    </select>
+
+    <select id="customCustomPageList"
+            resultType="cn.stylefeng.guns.modular.database.model.result.DatabaseDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.DatabaseDatainfoParam">
+        select
+        <include refid="full_Column_List"/>
+        from tb_database_datainfo tdd
+        left join sys_user su on tdd.create_user = su.user_id
+        where 1 = 1 and tdd.state != 'DELETED'
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and (
+            title like CONCAT('%',#{paramCondition.title},'%')
+            or db_type like CONCAT('%',#{paramCondition.title},'%')
+            or jdbc_url like CONCAT('%',#{paramCondition.title},'%')
+            )
+        </if>
+        and (
+        tdd.is_open='on'
+        or (
+        tdd.create_user = #{createId}
+        or tdd.id IN (
+        SELECT
+        record_id
+        FROM
+        tb_database_share_relation tsr
+        WHERE
+        tsr.user_id = #{createId}
+        AND tsr.record_type = 'DATABASE_DATAINFO'
+        )
+        )
+        )
+        order by id desc
+    </select>
+
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.DatabaseDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_database_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+</mapper>

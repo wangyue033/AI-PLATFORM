@@ -8,8 +8,9 @@ beetl:
 spring:
   profiles:
 #    active: @spring.active@
-#    active: local
-    active: produce
+    active: local
+#    active: produce
+  #    active: docker
   mvc:
     view:
       prefix: /pages

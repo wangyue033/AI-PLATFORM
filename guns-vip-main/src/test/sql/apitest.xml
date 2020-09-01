@@ -1,0 +1,49 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="1597969597000" />
+        <option name="domain" value="192.168.67.117" />
+        <option name="name" value="Authorization" />
+        <option name="path" value="/" />
+        <option name="value" value="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNTk3OTY5NTk2LCJ1c2VySWQiOjIsImlhdCI6MTU5Nzg4MzE5NiwiYWNjb3VudCI6Ind5IiwidXNlcktleSI6Inh4eHgifQ.e2jG53YpBqKmkkV5HnTpaKuQkUKdfVTDPNtpV3ysu0H5aOv49BsqxRMO6xqx7wxSOKbnkTV9IYbrYeoO6g7h_A" />
+      </Biscuit>
+      <Biscuit>
+        <option name="date" value="1598316571000" />
+        <option name="domain" value="192.168.24.48" />
+        <option name="name" value="Authorization" />
+        <option name="path" value="/" />
+        <option name="value" value="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNTk4MzE2NTcwLCJ1c2VySWQiOjIsImlhdCI6MTU5ODIzMDE3MCwiYWNjb3VudCI6Ind5IiwidXNlcktleSI6Inh4eHgifQ.G1ADP-5_9JTKvrdJOw1XA3KBVjwIDoMDLLpKRPSrqgMo4O48OCOJhgujvbp_T3FDfG94-D95WFviWE6ZapYIeA" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="http://192.168.24.48:8088" />
+  <option name="urlPath" value="/aix/login" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="application/x-www-form-urlencoded" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="token" />
+        <option name="value" value="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiZXhwIjoxNTk4MzE2NTcwLCJ1c2VySWQiOjIsImlhdCI6MTU5ODIzMDE3MCwiYWNjb3VudCI6Ind5IiwidXNlcktleSI6Inh4eHgifQ.G1ADP-5_9JTKvrdJOw1XA3KBVjwIDoMDLLpKRPSrqgMo4O48OCOJhgujvbp_T3FDfG94-D95WFviWE6ZapYIeA" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="username" />
+        <option name="value" value="wy" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="true" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="{&quot;metric&quot;:&quot;mytest.io&quot;,&quot;timestamp&quot;:1597704821,&quot;value&quot;:16,&quot;tags&quot;:{&quot;host&quot;:&quot;192.168.24.48&quot;}}" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

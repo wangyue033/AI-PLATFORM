@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.database.mapper.IrregularDatainfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.database.entity.IrregularDatainfo">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="load_id" property="loadId"/>
+        <result column="load_name" property="loadName"/>
+        <result column="load_location" property="loadLocation"/>
+        <result column="document_id" property="documentId"/>
+        <result column="document_name" property="documentName"/>
+        <result column="document_location" property="documentLocation"/>
+        <result column="state" property="state"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="share_target" property="shareTarget"/>
+        <result column="is_open" property="isOpen"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", title AS "title", description AS "description", load_id AS "loadId", load_name AS "loadName", load_location AS "loadLocation", document_id AS "documentId", document_name AS "documentName", document_location AS "documentLocation", state AS "state", remark AS "remark", create_time AS "createTime", create_user AS "createUser", share_target AS "shareTarget", is_open AS "isOpen"
+    </sql>
+
+    <sql id="full_Column_List">
+        tid.id AS "id", tid.title AS "title", tid.description AS "description", tid.load_id AS "loadId", tid.load_name AS "loadName", tid.load_location AS "loadLocation", tid.document_id AS "documentId",
+        tid.document_name AS "documentName", tid.document_location AS "documentLocation", tid.state AS "state", remark AS "remark", tid.create_time AS "createTime", tid.create_user AS "createUser",
+        tid.share_target AS "shareTarget", tid.is_open AS "isOpen", su.name as "createUserName"
+    </sql>
+
+
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.database.model.result.IrregularDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_irregular_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_irregular_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.database.model.result.IrregularDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
+        select
+        <include refid="full_Column_List"/>
+        from tb_irregular_datainfo tid
+        left join sys_user su on tid.create_user = su.user_id
+        where 1 = 1 and tid.state != 'DELETED'
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and (
+            title like CONCAT('%',#{paramCondition.title},'%')
+            or description like CONCAT('%',#{paramCondition.title},'%')
+            )
+        </if>
+        order by id desc
+    </select>
+
+    <select id="customCustomPageList"
+            resultType="cn.stylefeng.guns.modular.database.model.result.IrregularDatainfoResult"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
+        select
+        <include refid="full_Column_List"/>
+        from tb_irregular_datainfo tid
+        left join sys_user su on tid.create_user = su.user_id
+        where 1 = 1 and tid.state != 'DELETED'
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and (
+            title like CONCAT('%',#{paramCondition.title},'%')
+            or description like CONCAT('%',#{paramCondition.title},'%')
+            )
+        </if>
+        and (
+        tid.is_open='on'
+        or (
+        tid.create_user = #{createId}
+        or tid.id IN (
+        SELECT
+        record_id
+        FROM
+        tb_database_share_relation tsr
+        WHERE
+        tsr.user_id = #{createId}
+        AND tsr.record_type = 'IRRELAGULAR_DATAINFO'
+        )
+        )
+        )
+        order by id desc
+    </select>
+
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_irregular_datainfo where 1 = 1
+        <if test="paramCondition.title != null and paramCondition.title != ''">
+            and title like CONCAT('%',#{paramCondition.title},'%')
+        </if>
+    </select>
+
+</mapper>
