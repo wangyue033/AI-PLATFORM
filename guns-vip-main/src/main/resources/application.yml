@@ -16,8 +16,8 @@ spring:
       prefix: /pages
   servlet:
     multipart:
-      max-request-size: 100MB
-      max-file-size: 100MB
+      max-request-size: 1000MB
+      max-file-size: 1000MB
   jta:
     atomikos:
       properties:
