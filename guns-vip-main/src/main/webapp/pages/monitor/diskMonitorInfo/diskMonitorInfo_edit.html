@@ -1,0 +1,82 @@
+@layout("/common/_form.html",{js:["/assets/monitor/diskMonitorInfo/diskMonitorInfo_edit.js"]}){
+
+<form class="layui-form" id="diskMonitorInfoForm" lay-filter="diskMonitorInfoForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">数据标识<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="dataTip" name="dataTip" placeholder="请输入数据标识" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">服务器名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="serverName" name="serverName" placeholder="请输入服务器名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">IP地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="ipAddress" name="ipAddress" placeholder="请输入IP地址" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">盘符路径<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="dirName" name="dirName" placeholder="请输入盘符路径" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">盘符类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="sysTypeName" name="sysTypeName" placeholder="请输入盘符类型" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">文件类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="typeName" name="typeName" placeholder="请输入文件类型" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">总大小<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="total" name="total" placeholder="请输入总大小" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">剩余大小<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="free" name="free" placeholder="请输入剩余大小" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">已使用量<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="used" name="used" placeholder="请输入已使用量" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="diskUsage" name="diskUsage" placeholder="请输入使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

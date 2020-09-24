@@ -1,0 +1,45 @@
+@layout("/common/_form.html",{js:["/assets/database/dataSearch/dataSearch_search.js"],css:["/assets/expand/module/formSelects/formSelects-v4.css"]}){
+
+<form class="layui-form" id="dataSearchForm" lay-filter="dataSearchForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">数据查询</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">选择数据源<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <select id="id" name="id" lay-filter="id" lay-verify="required" required >
+                                <option value=""></option>
+                                @for(item in databaseDatainfo!){
+                                <option value="${item.id}">${item.title}  -------  ${item.jdbcUrl}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择表</label>
+                    <div class="layui-input-block">
+                        <table class="layui-hide" id="dbTableList" lay-filter="dbTableList"></table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!--    <div class="form-group-bottom text-center">-->
+<!--        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>-->
+<!--        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>-->
+<!--    </div>-->
+</form>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn layui-btn-xs layui-hide" name="con-btn" id="{{d.tableName}}_opt" lay-event="conditionEdit">
+        数据字段及查询
+    </a>
+</script>
+
+@}

@@ -21,65 +21,66 @@
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">入参说明<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">入参说明</label>
                         <div class="layui-input-block">
-                            <input id="inParams" name="inParams" placeholder="请输入入参说明" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="inParams" name="inParams" placeholder="请输入入参说明" type="text" class="layui-input" />
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">结果说明<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">结果说明</label>
                         <div class="layui-input-block">
-                            <input id="result" name="result" placeholder="请输入结果说明" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="result" name="result" placeholder="请输入结果说明" type="text" class="layui-input" />
                         </div>
                     </div>
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">接口描述<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">接口描述</label>
                         <div class="layui-input-block">
-                            <input id="apiDesc" name="apiDesc" placeholder="请输入接口描述" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="apiDesc" name="apiDesc" placeholder="请输入接口描述" type="text" class="layui-input" />
                         </div>
                     </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">上传说明文档</label>
+                        <div class="layui-input-block">
+                            <input id="documentId" name="documentId" type="hidden" class="layui-input"/>
+                            <input id="documentName" name="documentName" type="hidden" class="layui-input"/>
+                            <div style="float: left;">
+                                <button type="button" class="layui-btn layui-btn-sm" id="documentBtn"><i class="layui-icon"></i>上传文件</button>
+                            </div>
+                            <div style="float: left;">
+                                <span class="layui-inline layui-upload-choose" style="padding: 4px 10px;" id="documentNameTip"></span>
+                            </div>
+
+                            <div style="float: left;">
+                                <button type="button" class="layui-btn layui-btn-sm" id="documentDownBtn"><i class="layui-icon">&#xe67d;</i>下载文件</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">接口文档ID<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">说明文档保存地址</label>
                         <div class="layui-input-block">
-                            <input id="documentId" name="documentId" placeholder="请输入接口文档ID" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="documentLocation" name="documentLocation" placeholder="说明文档保存地址" type="text" class="layui-input" readonly="readonly" />
                         </div>
                     </div>
+
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">接口文档名称<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">是否公开</label>
                         <div class="layui-input-block">
-                            <input id="documentName" name="documentName" placeholder="请输入接口文档名称" type="text" class="layui-input" lay-verify="required" required/>
+                            <select id="isOpen" name="isOpen" lay-filter="isOpen" lay-verify="required" required >
+                                <option value="on">是</option>
+                                <option value="off">否</option>
+                            </select>
                         </div>
                     </div>
+
                     <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">接口文档保存地址<span style="color: red;">*</span></label>
+                        <label class="layui-form-label">备注</label>
                         <div class="layui-input-block">
-                            <input id="documentLocation" name="documentLocation" placeholder="请输入接口文档保存地址" type="text" class="layui-input" lay-verify="required" required/>
+                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
                         </div>
                     </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">状态<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="state" name="state" placeholder="请输入状态" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">分享对象<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="shareTarget" name="shareTarget" placeholder="请输入分享对象" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
-                    <div class="layui-inline layui-col-md12">
-                        <label class="layui-form-label">是否公开<span style="color: red;">*</span></label>
-                        <div class="layui-input-block">
-                            <input id="isOpen" name="isOpen" placeholder="请输入是否公开" type="text" class="layui-input" lay-verify="required" required/>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

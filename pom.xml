@@ -42,6 +42,7 @@
         <batik.version>1.7</batik.version>
         <docker.img.version>latest</docker.img.version>
         <kernel.version>2.2.12</kernel.version>
+        <excelkernel.version>2.2.12</excelkernel.version>
     </properties>
 
     <dependencyManagement>
@@ -62,7 +63,7 @@
             <dependency>
                 <groupId>cn.stylefeng.roses</groupId>
                 <artifactId>kernel-excel</artifactId>
-                <version>${kernel.version}</version>
+                <version>${excelkernel.version}</version>
             </dependency>
 
             <!--数据库驱动,可根据自己需要自行删减-->

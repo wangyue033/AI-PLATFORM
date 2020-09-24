@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.monitor.mapper.ServerMonitorInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.monitor.entity.ServerMonitorInfo">
+        <id column="id" property="id"/>
+        <result column="data_tip" property="dataTip"/>
+        <result column="server_name" property="serverName"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="user_dir" property="userDir"/>
+        <result column="operation_system" property="operationSystem"/>
+        <result column="system_arch" property="systemArch"/>
+        <result column="cpu_num" property="cpuNum"/>
+        <result column="cpu_total" property="cpuTotal"/>
+        <result column="cpu_sys" property="cpuSys"/>
+        <result column="cpu_used" property="cpuUsed"/>
+        <result column="cpu_usage" property="cpuUsage"/>
+        <result column="cpu_wait" property="cpuWait"/>
+        <result column="cpu_free" property="cpuFree"/>
+        <result column="memo_total" property="memoTotal"/>
+        <result column="memo_used" property="memoUsed"/>
+        <result column="memo_free" property="memoFree"/>
+        <result column="memo_usage" property="memoUsage"/>
+        <result column="create_time" property="createTime"/>
+        <result column="jvm_total" property="jvmTotal"/>
+        <result column="jvm_max" property="jvmMax"/>
+        <result column="jvm_free" property="jvmFree"/>
+        <result column="jvm_version" property="jvmVersion"/>
+        <result column="jvm_home" property="jvmHome"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", data_tip AS "dataTip", server_name AS "serverName", ip_address AS "ipAddress", user_dir AS "userDir", operation_system AS "operationSystem", system_arch AS "systemArch", cpu_num AS "cpuNum", cpu_total AS "cpuTotal", cpu_sys AS "cpuSys", cpu_used AS "cpuUsed", cpu_usage AS "cpuUsage", cpu_wait AS "cpuWait", cpu_free AS "cpuFree", memo_total AS "memoTotal", memo_used AS "memoUsed", memo_free AS "memoFree", memo_usage AS "memoUsage", create_time AS "createTime", jvm_total AS "jvmTotal", jvm_max AS "jvmMax", jvm_free AS "jvmFree", jvm_version AS "jvmVersion", jvm_home AS "jvmHome"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.monitor.model.result.ServerMonitorInfoResult"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.ServerMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.ServerMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.monitor.model.result.ServerMonitorInfoResult"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.ServerMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+        order by id desc
+    </select>
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.ServerMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_server_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,108 @@
+@layout("/common/_container.html",{title:"数据查询",bg:"bg-white",js:["/assets/database/dataSearch/tableFields.js"]}){
+
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+    <div class="layui-tab-content" style="height: 100px;">
+        <table lay-filter="fieldTable" id="fieldTable"></table>
+
+        <input type="hidden" id="tableName" value="${tableName}">
+        <input type="hidden" id="dbId" value="${dbId}">
+
+
+        <div class="layui-inline layui-col-md12">
+            <label class="layui-form-label">表名</label>
+            <div class="layui-input-block">
+                <input id="tableNameTip" name="tableNameTip" type="text"
+                       class="layui-input" required readonly="readonly"/>
+            </div>
+        </div>
+        <div class="layui-inline layui-col-md12">
+            <label class="layui-form-label">查询条件</label>
+            <div class="layui-input-block">
+                <input id="condition" name="condition" placeholder="请输入查询条件（例如：id<100）" type="text"
+                       class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-inline layui-col-md12">
+            <label class="layui-form-label">查询数量</label>
+            <div class="layui-input-block">
+                <input id="limitNumber" name="limitNumber" placeholder="请输入查询数量,默认查询5条记录" type="text"
+                       class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" id="submit">数据查询</button>
+            <button class="layui-btn" id="remark">标记</button>
+        </div>
+        <div class="layui-inline layui-col-md12">
+            <label class="layui-form-label">查询结果</label>
+            <div class="layui-input-block">
+                <input id="searchResult" name="searchResult" type="text" class="layui-textarea"/>
+            </div>
+        </div>
+
+        <div class="layui-inline layui-col-md12">
+            <label class="layui-form-label">数据处理</label>
+            <div class="layui-input-block">
+                <input id="ddlSql" name="ddlSql" placeholder="请输入数据处理sql语句，例如：修改（update）、删除（delete）" type="text"
+                       class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item text-center">
+            <button class="layui-btn" id="operation">执行</button>
+        </div>
+
+        <div class="layui-form-item text-center">
+            <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">关闭</button>
+            <!--            <button class="layui-btn" id="download">数据导出</button>-->
+        </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="conditionTpl">
+    <div class="layui-form">
+        <input type="checkbox" id="{{d.columnName}}" name="queryConditionFlag"
+               {{# if(d.queryConditionFlag== true){ }}
+               checked="checked"
+               {{# } }}
+               lay-skin="primary" lay-filter="queryConditionFlagFilter">
+    </div>
+</script>
+
+<script type="text/html" id="inputTypeTpl">
+    <div class="layui-form">
+        <select id="{{d.columnName}}" name="inputType" lay-filter="columnStyleFilter">
+            {{# layui.each(d.inputTypeList, function(index, data){ }}
+            <option value="{{data.value}}">{{data.name}}</option>
+            {{# }); }}
+        </select>
+    </div>
+</script>
+
+<style>
+    .layui-select-title,
+    .layui-form-select {
+        height: 34px;
+    }
+
+    .layui-form-select dl {
+        max-height: 150px;
+    }
+
+    .layui-input.layui-unselect {
+        border: 1;
+        height: 90%;
+    }
+
+    .layui-table-cell {
+        overflow: initial;
+        /*overflow: hidden;*/
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+@}

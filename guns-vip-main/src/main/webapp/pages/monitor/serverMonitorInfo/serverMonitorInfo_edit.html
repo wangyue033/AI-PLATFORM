@@ -1,0 +1,154 @@
+@layout("/common/_form.html",{js:["/assets/monitor/serverMonitorInfo/serverMonitorInfo_edit.js"]}){
+
+<form class="layui-form" id="serverMonitorInfoForm" lay-filter="serverMonitorInfoForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">数据标识<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="dataTip" name="dataTip" placeholder="请输入数据标识" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">服务器名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="serverName" name="serverName" placeholder="请输入服务器名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">IP地址<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="ipAddress" name="ipAddress" placeholder="请输入IP地址" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目路径<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="userDir" name="userDir" placeholder="请输入项目路径" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">操作系统<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="operationSystem" name="operationSystem" placeholder="请输入操作系统" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">系统架构<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="systemArch" name="systemArch" placeholder="请输入系统架构" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">cpu核心数<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuNum" name="cpuNum" placeholder="请输入cpu核心数" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">CPU总使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuTotal" name="cpuTotal" placeholder="请输入CPU总使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label"> CPU系统使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuSys" name="cpuSys" placeholder="请输入 CPU系统使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">CPU用户使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuUsed" name="cpuUsed" placeholder="请输入CPU用户使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">cpu使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuUsage" name="cpuUsage" placeholder="请输入cpu使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">CPU当前等待率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuWait" name="cpuWait" placeholder="请输入CPU当前等待率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">cpu空闲率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="cpuFree" name="cpuFree" placeholder="请输入cpu空闲率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">总内存<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="memoTotal" name="memoTotal" placeholder="请输入总内存" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">已用内存<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="memoUsed" name="memoUsed" placeholder="请输入已用内存" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">剩余内存<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="memoFree" name="memoFree" placeholder="请输入剩余内存" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">内存使用率<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="memoUsage" name="memoUsage" placeholder="请输入内存使用率" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">当前JVM占用的内存总数(M)<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jvmTotal" name="jvmTotal" placeholder="请输入当前JVM占用的内存总数(M)" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">JVM最大可用内存总数(M)<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jvmMax" name="jvmMax" placeholder="请输入JVM最大可用内存总数(M)" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">JVM空闲内存(M)<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jvmFree" name="jvmFree" placeholder="请输入JVM空闲内存(M)" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">JDK版本<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jvmVersion" name="jvmVersion" placeholder="请输入JDK版本" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">JDK路径<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="jvmHome" name="jvmHome" placeholder="请输入JDK路径" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" id="cancel">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

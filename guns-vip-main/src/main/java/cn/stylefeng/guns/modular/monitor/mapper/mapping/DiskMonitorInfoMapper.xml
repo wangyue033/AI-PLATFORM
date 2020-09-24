@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.monitor.mapper.DiskMonitorInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.monitor.entity.DiskMonitorInfo">
+        <id column="id" property="id"/>
+        <result column="data_tip" property="dataTip"/>
+        <result column="server_name" property="serverName"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="dir_name" property="dirName"/>
+        <result column="sysTypeName" property="sysTypeName"/>
+        <result column="typeName" property="typeName"/>
+        <result column="total" property="total"/>
+        <result column="free" property="free"/>
+        <result column="used" property="used"/>
+        <result column="disk_usage" property="diskUsage"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", data_tip AS "dataTip", server_name AS "serverName", ip_address AS "ipAddress", dir_name AS "dirName", sysTypeName AS "sysTypeName", typeName AS "typeName", total AS "total", free AS "free", used AS "used", disk_usage AS "diskUsage", create_time AS "createTime"
+    </sql>
+
+
+    <select id="customList" resultType="cn.stylefeng.guns.modular.monitor.model.result.DiskMonitorInfoResult"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.DiskMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_disk_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+    <select id="customMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.DiskMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_disk_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="cn.stylefeng.guns.modular.monitor.model.result.DiskMonitorInfoResult"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.DiskMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_disk_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+        order by id desc
+    </select>
+
+    <select id="customPageMapList" resultType="map"
+            parameterType="cn.stylefeng.guns.modular.monitor.model.params.DiskMonitorInfoParam">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_disk_monitor_info where 1 = 1
+        <if test="paramCondition.dataTip != null and paramCondition.dataTip != ''">
+            and data_tip like CONCAT('%',#{paramCondition.dataTip},'%')
+        </if>
+    </select>
+
+</mapper>

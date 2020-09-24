@@ -33,8 +33,6 @@
     </sql>
 
 
-
-
     <select id="customList" resultType="cn.stylefeng.guns.modular.database.model.result.IrregularDatainfoResult"
             parameterType="cn.stylefeng.guns.modular.database.model.params.IrregularDatainfoParam">
         select
@@ -96,7 +94,7 @@
         tb_database_share_relation tsr
         WHERE
         tsr.user_id = #{createId}
-        AND tsr.record_type = 'IRRELAGULAR_DATAINFO'
+        AND tsr.record_type = 'API_NFO'
         )
         )
         )

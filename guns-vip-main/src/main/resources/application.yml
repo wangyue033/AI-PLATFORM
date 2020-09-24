@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 28088
   max-http-header-size: 10240
 
 beetl:
@@ -8,8 +8,8 @@ beetl:
 spring:
   profiles:
 #    active: @spring.active@
-    active: local
-#    active: produce
+#    active: local
+    active: produce
   #    active: docker
   mvc:
     view:

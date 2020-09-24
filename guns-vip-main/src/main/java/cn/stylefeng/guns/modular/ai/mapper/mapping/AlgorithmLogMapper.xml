@@ -14,11 +14,13 @@
         <result column="succeed" property="succeed" />
         <result column="message" property="message" />
         <result column="process_time" property="processTime" />
+        <result column="opt_type" property="optType" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id AS "id", log_type AS "logType", log_name AS "logName", user_id AS "userId", class_name AS "className", method AS "method", create_time AS "createTime", succeed AS "succeed", message AS "message", process_time AS "processTime"
+        id AS "id", log_type AS "logType", log_name AS "logName", user_id AS "userId", class_name AS "className", method AS "method",
+         create_time AS "createTime", succeed AS "succeed", message AS "message", process_time AS "processTime", opt_type AS "optType"
     </sql>
 
 
@@ -38,6 +40,17 @@
         select
         <include refid="Base_Column_List"/>
         from tb_algorithm_log where 1 = 1
+        <if test="paramCondition.logName != null and paramCondition.logName != ''">
+            and (
+            log_name like CONCAT('%',#{paramCondition.logName},'%')
+            or log_type like CONCAT('%',#{paramCondition.logName},'%')
+            or class_name like CONCAT('%',#{paramCondition.logName},'%')
+            or method like CONCAT('%',#{paramCondition.logName},'%')
+            or message like CONCAT('%',#{paramCondition.logName},'%')
+            or opt_type like CONCAT('%',#{paramCondition.logName},'%')
+            )
+        </if>
+        order by id desc
     </select>
 
     <select id="customPageMapList" resultType="map" parameterType="cn.stylefeng.guns.modular.ai.model.params.AlgorithmLogParam">

@@ -226,4 +226,50 @@
         </if>
     </select>
 
+
+    <select id="roleTreeListWithChildren" resultType="cn.stylefeng.guns.base.pojo.node.LayuiTreeNode">
+		select role_id AS id, pid as "pId",
+		name as title, (case when (pid = 0 or pid is null) then 'true'
+		else 'false' end) as "spread" from sys_role
+	</select>
+
+    <select id="roleTreeListByRoleIdtWithChildren" resultType="cn.stylefeng.guns.base.pojo.node.LayuiTreeNode">
+        SELECT
+        r.role_id as id,
+        pid as "pId",
+        name AS "title",
+        (
+        CASE
+        WHEN (pid = 0 OR pid IS NULL) THEN
+        'true'
+        ELSE
+        'false'
+        END
+        ) as "spread",
+        (
+        CASE
+        WHEN (r1.role_id = 0 OR r1.role_id IS NULL) THEN
+        'false'
+        ELSE
+        'true'
+        END
+        ) as "checked"
+        FROM
+        sys_role r
+        LEFT JOIN (
+        SELECT
+        role_id
+        FROM
+        sys_role
+        WHERE
+        role_id IN
+
+        <foreach collection="array" index="index" item="i" open="(" separator="," close=")">
+            #{i}
+        </foreach>
+
+        ) r1 ON r.role_id = r1.role_id
+        ORDER BY pid,sort ASC
+    </select>
+
 </mapper>

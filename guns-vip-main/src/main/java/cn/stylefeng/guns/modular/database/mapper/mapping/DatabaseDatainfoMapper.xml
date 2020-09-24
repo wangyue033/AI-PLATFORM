@@ -68,6 +68,9 @@
             or jdbc_url like CONCAT('%',#{paramCondition.title},'%')
             )
         </if>
+        <if test="paramCondition.dbType != null and paramCondition.dbType != ''">
+            and db_type = #{paramCondition.dbType}
+        </if>
         order by id desc
     </select>
 
@@ -79,6 +82,9 @@
         from tb_database_datainfo tdd
         left join sys_user su on tdd.create_user = su.user_id
         where 1 = 1 and tdd.state != 'DELETED'
+        <if test="paramCondition.dbType != null and paramCondition.dbType != ''">
+            and db_type = #{paramCondition.dbType}
+        </if>
         <if test="paramCondition.title != null and paramCondition.title != ''">
             and (
             title like CONCAT('%',#{paramCondition.title},'%')
